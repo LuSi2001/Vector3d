@@ -23,14 +23,26 @@ public:
         return *this;
     }
 
-    T length2() const
+    const T &x() const{
+        return m_x;
+    }
+
+    const T &y() const{
+        return m_x;
+    }
+
+    const T &z() const{
+        return m_x;
+    }
+
+    T lengthSquared() const
     {
         return (m_x * m_x + m_y * m_y + m_z * m_z);
     }
 
     T length() const
     {
-        return std::sqrt(length2());
+        return std::sqrt(lengthSquared());
     }
 
 private:
