@@ -8,6 +8,11 @@
 namespace mats
 {
 
+template <typename T> inline bool almostEqual(T v0, T v1, T epsilon = 0.0001)
+{
+    return std::abs(v0 - v1) < epsilon;
+}
+
 template <typename T> inline T sqr(const T &v) {return v * v;}
 
 template<typename T> class Vector3
@@ -151,6 +156,13 @@ public:
             return false;
         }
         return (m_v[2] > other.z());
+    }
+
+    bool almostEqual(const Vector3 &v, T epsilon = 0.0001) const
+    {
+        return (almostEqual(v.x(), m_v[0]) and
+                almostEqual(v.y(), m_v[1]) and
+                almostEqual(v.z(), m_v[2]));
     }
 
     T x() const

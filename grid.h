@@ -14,31 +14,23 @@
 #ifndef GRID_H
 #define GRID_H
 
-#include <QPointF>
 #include <QSizeF>
 
 class QPainter;
 class QSize;
+class QPointF;
+class QPen;
 
 class Grid
 {
 public:
     Grid() = default;
-    void draw(QPainter &p);
-    void setSize(const QSize &s);
-    const QSizeF& size() const;
-    void setScale(const int v);
-    void setOffset(const QPointF &off);
-    const QPointF &position() const;
-    const QPointF &offset() const;
-    const qreal& scale() const;
+    void draw(QPainter &p, const QPointF &pos, qreal scale, const QSizeF &size) const;
 
 private:
-    QPointF m_offset;
-    QSizeF m_size;
-    qreal m_scale = 100;
-    QPointF m_position;
-    bool m_sizeSet = false;
+
+    void drawLines(QPainter &p, const QSizeF &sSize,
+                   const QPointF &sPos, const qreal d) const;
 };
 
 #endif // GRID_H

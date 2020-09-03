@@ -15,10 +15,18 @@ public:
 
 private:
 
-    float m_scale = 1;
     Grid m_grid;
-    QPointF m_startPos;
-    bool drag = false;
+
+    QPointF m_position = QPointF(0, 0);
+    QPointF m_offset = QPointF(0, 0);
+    QPointF m_dragStart;
+
+    QSizeF m_size;
+
+    qreal m_scale = 1.0;
+    qreal m_angle = 0.0;
+
+    bool dragged = false;
 
     void drawGrid(QPainter& p);
     void drawVector(QPainter& p, mats::Vec3 &vec);
