@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "constants.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,6 +19,14 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+signals:
+    void resultCall();
+    void specialChar(QString op);
+
+private slots:
+    void on_equals_clicked();
+    void checkOp(Operation op);
 
 };
 #endif // MAINWINDOW_H

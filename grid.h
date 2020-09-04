@@ -14,7 +14,7 @@
 #ifndef GRID_H
 #define GRID_H
 
-#include <QSizeF>
+#include <QRectF>
 
 class QPainter;
 class QSize;
@@ -25,11 +25,11 @@ class Grid
 {
 public:
     Grid() = default;
-    void draw(QPainter &p, const QPointF &pos, qreal scale, const QSizeF &size) const;
+    void draw(QPainter &p, const QPointF &pos, qreal scale, const QRectF &r) const;
 
 private:
 
-    void drawLines(QPainter &p, const QSizeF &sSize,
+    void drawLines(QPainter &p, const QRectF &sRect,
                    const QPointF &sPos, const qreal d) const;
 };
 

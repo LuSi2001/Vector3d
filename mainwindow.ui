@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>698</width>
-    <height>360</height>
+    <width>871</width>
+    <height>552</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,14 +16,55 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0">
     <item>
-     <widget class="Canvas" name="widget" native="true"/>
+     <widget class="Canvas" name="canvas" native="true"/>
     </item>
     <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="Vector3EditWidget" name="groupVec1">
+        <property name="title">
+         <string>Vector 1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Vector3EditWidget" name="groupVec2">
+        <property name="title">
+         <string>Vector 2</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="equals">
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>=</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Vector3EditWidget" name="groupVec3">
+        <property name="title">
+         <string>Result Vector</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -32,7 +73,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>698</width>
+     <width>871</width>
      <height>23</height>
     </rect>
    </property>
@@ -44,6 +85,12 @@
    <class>Canvas</class>
    <extends>QWidget</extends>
    <header>canvas.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Vector3EditWidget</class>
+   <extends>QGroupBox</extends>
+   <header>vector3editwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

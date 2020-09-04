@@ -19,17 +19,21 @@ SOURCES += \
     canvas.cpp \
     grid.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    vector3editwidget.cpp
 
 HEADERS += \
     canvas.h \
+    constants.h \
     grid.h \
     mainwindow.h \
     utils.h \
-    vector.h
+    vector.h \
+    vector3editwidget.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    vector3editwidget.ui
 
 TRANSLATIONS += \
     Vector_en_US.ts

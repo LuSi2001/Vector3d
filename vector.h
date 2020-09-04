@@ -41,7 +41,7 @@ public:
 
     T operator * (const Vector3 &other)
     {
-        return m_v[0] * other.x() + m_v[1] * other.y() + m_v[2] + other.z();
+        return m_v[0] * other.x() + m_v[1] * other.y() + m_v[2] * other.z();
     }
 
     Vector3 operator^(const Vector3 &other) const
