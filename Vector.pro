@@ -25,6 +25,7 @@ SOURCES += \
 HEADERS += \
     canvas.h \
     constants.h \
+    draw.h \
     grid.h \
     mainwindow.h \
     utils.h \

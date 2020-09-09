@@ -14,28 +14,31 @@ class Vector3EditWidget : public QGroupBox
 public:
     explicit Vector3EditWidget(QWidget *parent = nullptr);
     ~Vector3EditWidget();
-    void setReadOnly(bool r);
-    void toScalar();
-    void toVector();
-    void setResult(const mats::Vec3 &v, const int mode);
     bool scalarMode() const;
+    void setReadOnly(bool r);
+    void setValidator();
 
 signals:
 
-    void    valueChanged(const mats::Vec3 &);
+    void valueChanged(const mats::Vec3 &);
 
 public slots:
 
     void deleteEntries();
+    void fillEdits(const mats::Vec3 &v);
+    void setResult(const mats::Vec3 &v);
+    void toScalar();
+    void toVector();
 
 private slots:
 
-    void    coordinateChanged();
+    void coordinateChanged();
 
 private:
     Ui::GroupBox *ui;
 
     bool m_scalarMode = false;
+    bool m_valueSetExternally = false;
 };
 
 #endif // VECTOR3EDITWIDGET_H

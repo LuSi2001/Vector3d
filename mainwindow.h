@@ -25,8 +25,9 @@ signals:
     void specialChar(QString op);
 
 private slots:
-    void on_equals_clicked();
-    void checkOp(Operation op);
+    void checkOp(Operation op) const;
+    void newCursor(const QCursor &cursor);
+    void on_equals_clicked() const;
 
 };
 #endif // MAINWINDOW_H

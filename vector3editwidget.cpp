@@ -1,6 +1,8 @@
 #include "vector3editwidget.h"
 #include "ui_vector3editwidget.h"
 
+#include <string>
+
 Vector3EditWidget::Vector3EditWidget(QWidget *parent) :
     QGroupBox(parent),
     ui(new Ui::GroupBox)
@@ -17,15 +19,52 @@ Vector3EditWidget::~Vector3EditWidget()
     delete ui;
 }
 
+bool Vector3EditWidget::scalarMode() const{
+    return m_scalarMode;
+}
+
+void Vector3EditWidget::setReadOnly(bool r){
+    if(r){
+        ui->xLineEdit->setReadOnly(true);
+        ui->yLineEdit->setReadOnly(true);
+        ui->zLineEdit->setReadOnly(true);
+    }
+}
+
+void Vector3EditWidget::setValidator(){
+    const QDoubleValidator doub;
+    ui->xLineEdit->setValidator(&doub);
+    ui->yLineEdit->setValidator(&doub);
+    ui->zLineEdit->setValidator(&doub);
+}
+
+/* ++++++++++++++++++++++++++++++++SLOTS+++++++++++++++++++++++++++++++ */
 void Vector3EditWidget::coordinateChanged()
 {
-    mats::Vec3  v;
+    if (not m_valueSetExternally)
+    {
+        mats::Vec3  v;
 
-    v.x() = ui->xLineEdit->text().toDouble();
-    v.y() = ui->yLineEdit->text().toDouble();
-    v.z() = ui->zLineEdit->text().toDouble();
+        v.x() = ui->xLineEdit->text().toDouble();
+        v.y() = ui->yLineEdit->text().toDouble();
+        v.z() = ui->zLineEdit->text().toDouble();
 
-    emit valueChanged(v);
+        emit valueChanged(v);
+    }
+}
+
+void Vector3EditWidget::deleteEntries(){
+    ui->xLineEdit->setText("");
+    ui->yLineEdit->setText("");
+    ui->zLineEdit->setText("");
+}
+
+
+void Vector3EditWidget::fillEdits(const mats::Vec3 &v){
+    m_valueSetExternally = true;
+    ui->xLineEdit->setText(QString::number(v.x()));
+    ui->yLineEdit->setText(QString::number(v.y()));
+    m_valueSetExternally = false;
 }
 
 void Vector3EditWidget::toScalar(){
@@ -37,6 +76,7 @@ void Vector3EditWidget::toScalar(){
     ui->xLineEdit->hide();
     ui->zLineEdit->hide();
     m_scalarMode = true;
+    deleteEntries();
 }
 
 void Vector3EditWidget::toVector(){
@@ -48,31 +88,13 @@ void Vector3EditWidget::toVector(){
     ui->xLineEdit->show();
     ui->zLineEdit->show();
     m_scalarMode = false;
+    deleteEntries();
 }
 
-bool Vector3EditWidget::scalarMode() const{
-    return m_scalarMode;
-}
 
-void Vector3EditWidget::setResult(const mats::Vec3 &v, const int mode){
-    if(mode == 3){
-        ui->xLineEdit->setText(QString::number(v.x()));
-        ui->yLineEdit->setText(QString::number(v.y()));
-        ui->zLineEdit->setText(QString::number(v.z()));
-        return;
-    }
-}
-
-void Vector3EditWidget::setReadOnly(bool r){
-    if(r){
-        ui->xLineEdit->setReadOnly(true);
-        ui->yLineEdit->setReadOnly(true);
-        ui->zLineEdit->setReadOnly(true);
-    }
-}
-
-void Vector3EditWidget::deleteEntries(){
-    ui->xLineEdit->setText("");
-    ui->yLineEdit->setText("");
-    ui->zLineEdit->setText("");
+void Vector3EditWidget::setResult(const mats::Vec3 &v){
+    ui->xLineEdit->setText(QString::number(v.x()));
+    ui->yLineEdit->setText(QString::number(v.y()));
+    ui->zLineEdit->setText(QString::number(v.z()));
+    return;
 }

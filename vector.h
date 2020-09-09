@@ -17,9 +17,7 @@ template <typename T> inline T sqr(const T &v) {return v * v;}
 
 template<typename T> class Vector3
 {
-
 public:
-
     //! Ctor of class Vector3 using default
     Vector3() = default;
 
@@ -29,8 +27,76 @@ public:
         \param y    -   typedef yCoord
         \param z    -   typedef zCoord
     */
-    Vector3(T x, T y, T z) : m_v{x, y, z}{}
+    Vector3(T x, T y, T z = 0) : m_v{x, y, z}{}
 
+    bool almostEqual(const Vector3 &v, T epsilon = 0.0001) const
+    {
+        return (almostEqual(v.x(), m_v[0]) and
+                almostEqual(v.y(), m_v[1]) and
+                almostEqual(v.z(), m_v[2]));
+    }
+
+    T x() const
+    {
+        return m_v[0];
+    }
+
+    T &x()
+    {
+        return m_v[0];
+    }
+
+    T y() const
+    {
+        return m_v[1];
+    }
+
+    T &y()
+    {
+        return m_v[1];
+    }
+
+    T z() const
+    {
+        return m_v[2];
+    }
+
+    T &z()
+    {
+        return m_v[2];
+    }
+
+    Vector3 normalized() const
+    {
+        Vector3 v(*this);
+
+        v.normalize();
+
+        return v;
+    }
+
+    T normalize()
+    {
+        T   l = length();
+
+        *this /= l;
+
+        return l;
+    }
+
+    T lengthSquared() const
+    {
+        return (sqr(m_v[0]) + sqr(m_v[1]) + sqr(m_v[2]));
+    }
+
+    T length() const
+    {
+        return std::sqrt(lengthSquared());
+    }
+
+    Vector3 perp2D() const {return {-m_v[1], m_v[0], 0.0};}
+
+/* ++++++++++++++++++++++++++++++++OPERATORS+++++++++++++++++++++++++++++++ */
     const T &operator[](int i) const {return m_v[i];}
     T       &operator[](int i) {return m_v[i];}
 
@@ -44,7 +110,7 @@ public:
         return m_v[0] * other.x() + m_v[1] * other.y() + m_v[2] * other.z();
     }
 
-    Vector3 operator^(const Vector3 &other) const
+    Vector3 operator ^ (const Vector3 &other) const
     {
         T m_x = m_v[1] * other.z() - m_v[2] * other.y();
         T m_y = m_v[2] * other.x() - m_v[0] * other.z();
@@ -53,7 +119,7 @@ public:
         return Vector3(m_x, m_y, m_z);
     }
 
-    friend Vector3 operator*(T s, const Vector3 &me)
+    friend Vector3 operator * (T s, const Vector3 &me)
     {
         return me * s;
     }
@@ -158,73 +224,8 @@ public:
         return (m_v[2] > other.z());
     }
 
-    bool almostEqual(const Vector3 &v, T epsilon = 0.0001) const
-    {
-        return (almostEqual(v.x(), m_v[0]) and
-                almostEqual(v.y(), m_v[1]) and
-                almostEqual(v.z(), m_v[2]));
-    }
-
-    T x() const
-    {
-        return m_v[0];
-    }
-
-    T &x()
-    {
-        return m_v[0];
-    }
-
-    T y() const
-    {
-        return m_v[1];
-    }
-
-    T &y()
-    {
-        return m_v[1];
-    }
-
-    T z() const
-    {
-        return m_v[2];
-    }
-
-    T &z()
-    {
-        return m_v[2];
-    }
-
-    Vector3 normalized() const
-    {
-        Vector3 v(*this);
-
-        v.normalize();
-
-        return v;
-    }
-
-    T normalize()
-    {
-        T   l = length();
-
-        *this /= l;
-
-        return l;
-    }
-
-    T lengthSquared() const
-    {
-        return (sqr(m_v[0]) + sqr(m_v[1]) + sqr(m_v[2]));
-    }
-
-    T length() const
-    {
-        return std::sqrt(lengthSquared());
-    }
 
 private:
-
     T m_v[3] = {0, 0, 0};
 
 };
